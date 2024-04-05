@@ -1,0 +1,343 @@
+<ltd-auth>
+    <div 
+        class="row h-100"
+    >
+        <div 
+            class="col-lg-5 col-12"
+        >
+            <div 
+                id="auth-left"
+            >
+                <h1 
+                    class="auth-title"
+                >
+                Créer mon compte client
+                </h1>
+                <p 
+                    class="auth-subtitle mb-5"
+                >
+                    Saisissez les champs ci-dessous pour créer un compte client
+                </p>
+                <form 
+                    [formGroup]="formulaire" 
+                    (ngSubmit)="validationAdresseEmail()"
+                >
+                    <div 
+                        class="form-group position-relative has-icon-left mb-4"
+                    >
+                        <label 
+                            for="nomFamille"
+                        >
+                        *Nom de famille
+                        </label>
+                        <input 
+                            type="text" 
+                            onkeyup="this.value = this.value.toUpperCase();"
+                            class="form-control form-control-xl" 
+                            id="nomFamille" 
+                            formControlName="nomFamille"
+                            placeholder="Nom de famille"
+                        />
+                        <div 
+                            class="form-control-icon"
+                        >
+                            <i 
+                                class="bi bi-person"
+                            >
+                            </i>
+                        </div>
+                    </div>
+                    <div 
+                        class="alert alert-light-warning color-warning" 
+                        *ngIf="formulaire.controls['nomFamille'].dirty && formulaire.controls['nomFamille'].invalid"
+                    >
+                        <i 
+                            class="bi bi-exclamation-triangle"
+                        >
+                        </i>
+                        <p 
+                            *ngIf="formulaire.controls['nomFamille'].hasError('pattern')"
+                        >
+                            {{messagesErreur[0]}}
+                        </p>
+                        <p 
+                            *ngIf="formulaire.controls['nomFamille'].hasError('required')"
+                        >
+                        {{messagesErreur[1]}}
+                        </p>
+                    </div>
+                    <div 
+                        class="form-group position-relative has-icon-left mb-4"
+                    >
+                        <label 
+                            for="prenom"
+                            >
+                            *Prénom
+                        </label>
+                        <input 
+                            type="text" 
+                            class="form-control form-control-xl" 
+                            id="prenom" 
+                            formControlName="prenom"
+                            placeholder="Prénom"
+                        />
+                        <div 
+                            class="form-control-icon"
+                        >
+                            <i 
+                                class="bi bi-person"
+                            >
+                            </i>
+                        </div>
+                    </div>
+                    <div 
+                        class="alert alert-light-warning color-warning" 
+                        *ngIf="formulaire.controls['prenom'].dirty && formulaire.controls['prenom'].invalid"
+                    >
+                        <i 
+                            class="bi bi-exclamation-triangle"
+                            >
+                        </i>
+                        <p 
+                            *ngIf="formulaire.controls['prenom'].hasError('pattern')"
+                        >
+                            {{messagesErreur[0]}}
+                        </p>
+                        <p 
+                            *ngIf="formulaire.controls['prenom'].hasError('required')"
+                        >
+                            {{messagesErreur[1]}}
+                        </p>
+                    </div>
+                    <div 
+                        class="form-group position-relative has-icon-left mb-4"
+                    >
+                        <label 
+                            for="dateNaissance"
+                            >
+                            *Date de naissance
+                        </label>
+                        <input 
+                            type="date" 
+                            class="form-control form-control-xl" 
+                            id="dateNaissance"
+                            formControlName="dateNaissance"
+                            max={{dateHier}}/>
+                        <div 
+                            class="form-control-icon"
+                        >
+                            <i 
+                                class="bi bi-calendar2-date"
+                            >
+                            </i>
+                        </div>
+                    </div>
+                    <div 
+                        class="alert alert-light-warning color-warning" 
+                        *ngIf="formulaire.controls['dateNaissance'].dirty && formulaire.controls['dateNaissance'].invalid">
+                        <i 
+                            class="bi bi-exclamation-triangle"
+                        >
+                        </i>
+                        <p *ngIf="dateInvalide">
+                            {{messagesErreur[5]}}
+                        </p>
+                        <p *ngIf="formulaire.controls['dateNaissance'].hasError('required')">
+                            {{messagesErreur[1]}}
+                        </p>
+                    </div>
+                    <div 
+                        class="form-group position-relative has-icon-left mb-4"
+                    >
+                        <label 
+                            for="email"
+                        >
+                        *Adresse E-mail
+                        </label>
+                        <input 
+                            type="text" 
+                            class="form-control form-control-xl" 
+                            id="email" 
+                            formControlName="email"
+                            placeholder="Votre courriel personnel"/>
+                        <div 
+                            class="form-control-icon"
+                        >
+                            <i 
+                                class="bi bi-envelope"
+                            ></i>
+                        </div>
+                    </div>
+                    <div 
+                        class="alert alert-light-warning color-warning" *ngIf="formulaire.controls['email'].dirty && formulaire.controls['email'].invalid">
+                        <i 
+                            class="bi bi-exclamation-triangle">
+                        </i>
+                    <p 
+                            *ngIf="formulaire.controls['email'].hasError('pattern')"
+                        >
+                            {{messagesErreur[0]}}
+                        </p>
+                        <p 
+                            *ngIf="formulaire.controls['email'].hasError('required')"
+                        >
+                            {{messagesErreur[1]}}
+                        </p>
+                    </div>
+                    <div *ngIf="estDoublon" 
+                        class="alert alert-light-warning color-warning"
+                    >
+                        <i 
+                            class="bi bi-exclamation-triangle">
+                        </i>
+                        <p 
+                        >
+                            Cet e-mail est déjà présent, merci d'en saisir un nouveau
+                        </p>
+                    </div>
+                    <div *ngIf="estJetable" 
+                        class="alert alert-light-warning color-warning"
+                    >
+                        <i 
+                            class="bi bi-exclamation-triangle">
+                        </i>
+                        <p 
+                        >
+                            L'e-mail saisi est un e-mail jetable, merci de saisir un e-mail permanent
+                        </p>
+                    </div>
+                    <div 
+                        class="form-group position-relative has-icon-left mb-4"
+                    >
+                        <label
+                            for="password"
+                                data-bs-toggle="tooltip"
+                                data-bs-placement="top"
+                                data-bs-html="true"
+                                title="<div class='text-start'><p>Votre mot de passe doit répondre aux critères suivants :</p><ul class='list-bullet-hyphen'><li>au moins 8 caractères ;</li><li>au moins 1 MAJUSCULE ;</li><li>au moins 1 minuscule ;</li><li>au moins 1 chiffre ;</li><li>au moins 1 caractère spécial.</li></ul></div>"
+                                >
+                            *Mot de passe
+                        </label>
+                        <input
+                            type="password"
+                            class="form-control form-control-xl" 
+                            id="password" 
+                            formControlName="password"
+                            placeholder="Votre mot de passe"
+                            />
+                        <div 
+                            class="form-control-icon"
+                        >
+                            <i 
+                                class="bi bi-shield-lock"
+                            ></i>
+                        </div>
+                    </div>
+                    <div 
+                        class="alert alert-light-warning color-warning" 
+                        *ngIf="formulaire.controls['password'].dirty && formulaire.controls['password'].invalid"
+                    >
+                        <i 
+                            class="bi bi-exclamation-triangle"
+                            >
+                        </i>
+                        <p 
+                            *ngIf="formulaire.controls['password'].hasError('pattern')"
+                        >
+                            {{messagesErreur[0]}}
+                        </p>
+                        <p 
+                            *ngIf="formulaire.controls['password'].hasError('required')"
+                        >
+                            {{messagesErreur[1]}}
+                        </p>
+                    </div>
+                    <div 
+                        class="form-group position-relative has-icon-left mb-4"
+                    >
+                        <label 
+                            for="confirmationPassword"
+                            >
+                            *Confirmez votre mot de passe
+                        </label>
+                        <input 
+                            type="password" 
+                            class="form-control form-control-xl" 
+                            id="confirmationPassword" 
+                            formControlName="confirmationPassword"
+                            placeholder="Confirmez votre mot de passe"
+                        />
+                        <div 
+                            class="form-control-icon"
+                        >
+                            <i 
+                                class="bi bi-shield-lock"
+                            >
+                            </i>
+                        </div>
+                        <div 
+                        class="alert alert-light-warning color-warning"
+                        *ngIf="formulaire.get('password')?.value !== formulaire.get('confirmationPassword')?.value 
+                        && formulaire.get('confirmationPassword')?.value"
+                    >
+                        <i 
+                            class="bi bi-exclamation-triangle"
+                            >
+                        </i>
+                        <p
+                        >
+                            {{messagesErreur[2]}}
+                        </p>
+                    </div>
+                    </div>
+                    <div 
+                        class="form-check form-check-sm"
+                    >
+                        <div 
+                            class="custom-control custom-checkbox"
+                        >
+                            <label 
+                                class="form-check-label" 
+                                for="option"
+                                >
+                                J'accepte de recevoir la newsletter de BBO Ltd
+                            </label>
+                            <input 
+                                type="checkbox" 
+                                class="form-check-input form-check-primary form-check-glow"
+                                id="option" 
+                                formControlName="option"
+                            />
+                        </div>
+                    </div>
+                    <input
+                        type="submit" 
+                        value="Créer mon compte"
+                        class="btn btn-primary btn-block btn-lg shadow-lg mt-5" 
+                        [disabled]="formulaire.invalid" 
+                    />
+                </form>
+                <div 
+                    class="text-center mt-5 text-lg fs-4"
+                >
+                    <p>
+                        <a 
+                            routerLink="" 
+                            class="text-gray-600 font-bold"
+                        >
+                        Annuler
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div 
+            class="col-lg-7 d-none d-lg-block"
+            >
+            <div 
+                id="auth-right"
+                >
+            </div>
+        </div>
+    </div>
+</ltd-auth>

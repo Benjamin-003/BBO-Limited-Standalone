@@ -1,0 +1,6 @@
+<ltd-cart-detail
+    [cartItems]="cartItems"
+    (idToEmitForDeletion)="deleteItem($event)"
+    (idToEmitForQuantityModification)="incrementOrDecrementQuantity($event)"
+>
+</ltd-cart-detail>

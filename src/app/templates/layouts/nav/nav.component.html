@@ -1,0 +1,159 @@
+<nav>
+  <div 
+    class="sidebar-wrapper active"
+    >
+    <div 
+      class="sidebar-header"
+    >
+        <div 
+          class="d-flex justify-content-between"
+        >
+            <div 
+              class="logo"
+            >
+                <a 
+                  href="index.html">
+                  <img 
+                    src="assets/BBO Ltd.png" 
+                    alt="Logo">
+                </a>
+            </div>
+            <div 
+              class="toggler"
+            >
+                <a 
+                  class="sidebar-hide d-xl-none d-block"
+                  (click)="emitClickEvent()"
+                  >
+                  <i
+                    aria-hidden="true"
+                    class="bi bi-x bi-middle"
+                  >
+                </i>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div 
+      class="sidebar-menu"
+    >
+        <ul 
+          class="menu"
+        >
+            <li 
+              class="sidebar-title">
+                Menu
+                <span 
+                  *ngIf="isLoggedIn"
+                  > 
+                    - {{currentNameUser}}
+                    <i  
+                      type="button"
+                      class="bi bi-cart position-relative"
+                      aria-hidden="true"
+                      (click)="onClickCartIcon()"
+                    >
+                      <span
+                        id="badge-cart"
+                        class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary"
+                      >
+                        {{totalQuantitePanier}}
+                      </span>
+                    </i>
+                </span>
+            </li>
+          <li 
+            class="sidebar-item"
+          >
+          <button
+            id="warning" 
+            class="btn btn-outline-warning btn-lg btn-block"
+            (click)="onClickDisconnectButton()"
+            *ngIf="isLoggedIn"
+          >
+          <i
+            aria-hidden="true"
+            class="bi bi-plug"
+          >
+          </i>
+            Se déconnecter
+          </button>
+          </li>
+            <li 
+              class="sidebar-item"
+              routerLinkActive="active"
+            >
+                <a 
+                routerLink="accueil"
+                  class="sidebar-link"
+                >
+                    <i
+                      aria-hidden="true"
+                      class="bi bi-grid-fill"
+                    >
+                    </i>
+                    <span>
+                      Accueil
+                    </span>
+                </a>
+            </li>
+            <li 
+              class="sidebar-item"
+              routerLinkActive="active"
+              *ngIf="isLoggedIn"
+            >
+                <a 
+                  routerLink="produits"
+                  class="sidebar-link">
+                  <i
+                    aria-hidden="true"
+                    class="bi bi-list-columns"
+                  >
+                  </i>
+                    <span>
+                      Liste des produits
+                    </span>
+                </a>
+            </li>
+            <li 
+              class="sidebar-item"
+              routerLinkActive="active">
+                <a 
+                routerLink="auth/authentification"
+                  class="sidebar-link">
+                    <i
+                    aria-hidden="true"
+                      class="bi bi-person-badge-fill"
+                    >
+                    </i>
+                    <span>
+                        Connexion
+                    </span>
+                </a>
+            </li>
+            <li 
+              class="sidebar-item"
+              routerLinkActive="active">
+                <a 
+                  routerLink="auth/creation"
+                  class="sidebar-link">
+                    <i
+                      aria-hidden="true"
+                      class="bi bi-person-badge-fill">
+                    </i>
+                    <span>
+                      Créer mon compte
+                    </span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <button
+      class="sidebar-toggler btn x">
+      <i
+        aria-hidden="true"
+        data-feather="x">
+      </i>
+    </button>
+  </div>
+</nav>

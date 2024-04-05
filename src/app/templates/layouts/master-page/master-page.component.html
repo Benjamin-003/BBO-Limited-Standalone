@@ -1,0 +1,57 @@
+<div id="app">
+    <div 
+        id="barre-navigation" 
+        [class.active]="isScreenWide"
+    >
+        <ltd-nav 
+            (clickOnCross)="burgerMenuClick()"
+            (clickConnected)="getLoggedUserCard()"
+            (clickDisconnected)="disconnectUser()"
+            (clickCart)="clickOnCart()"
+            [totalQuantitePanier]="totalQuantitePanier"
+            [isLoggedIn]="isLoggedIn"
+            [currentNameUser]="currentNameUser"
+            >
+        </ltd-nav>
+    </div>
+    <div 
+        id="main"
+    >
+        <header 
+            class="mb-3"
+        >
+            <a 
+                (click)="burgerMenuClick()"
+                class="burger-btn d-block d-xl-none"
+            >
+                <i 
+                    class="bi bi-justify fs-3"
+                >
+                </i>
+            </a>
+        </header>
+        <div 
+        class="page"
+        >
+        <router-outlet>
+        </router-outlet>
+        </div>
+        <footer>
+            <div 
+                class="footer clearfix mb-0 text-muted"
+            >
+                <div 
+                    class="float-start"
+                >
+                <p>
+                    2022 &copy; BBO Ltd
+                </p>
+                </div>
+                <div 
+                class="float-end"
+                >
+            </div>
+        </div>
+        </footer>
+    </div>
+</div>

@@ -1,0 +1,40 @@
+
+  <div 
+    class="card"
+  >
+    <div 
+      class="card-content"
+    >
+      <div 
+        class="card-body"
+      >
+          <h4 
+            class="card-title"
+            >
+            {{product?.name}}
+          </h4>
+          <p 
+            class="card-text"
+          >
+            {{product?.description}}
+          </p>
+          <div
+        class="buttons"
+        *ngIf="showAddToCartButton"
+        >
+          <button
+          type="button"
+          class="btn btn-primary rounded-pill"
+          (click)="clickAddCart(product)"
+          >
+          Ajouter au panier
+        </button>
+        </div>
+          <p 
+            class="card-text text-muted"
+          >
+            {{product?.price|currency: "EUR":"symbol-narrow":"1.2-2"}}
+          </p>
+      </div>
+    </div>
+  </div>

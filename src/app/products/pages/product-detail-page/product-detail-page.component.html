@@ -1,0 +1,32 @@
+<ltd-generic-breadcrumb>
+</ltd-generic-breadcrumb>
+<div class="page-heading"
+>
+  <h3>
+    {{(product$|async)?.name}}
+  </h3>
+  <div 
+      class="row"
+    >
+      <div 
+        class="col-md-6 col-sm-12"
+      >
+        <ltd-picture-card 
+        [item]="(product$|async)?.name"
+        [imageURL]="(imageURL$|async)||''"
+        >
+        </ltd-picture-card>
+      </div>
+      <div 
+        class="col-md-6 col-sm-12"
+      >
+        <ltd-product-card 
+          [product]="(product$|async)!"
+          (emitOrder)="handOrder($event)"
+          [showAddToCartButton]="true"
+        > 
+        </ltd-product-card>
+      </div>
+    </div>
+  </div>
+
